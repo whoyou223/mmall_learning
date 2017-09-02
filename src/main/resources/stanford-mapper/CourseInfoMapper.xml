@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mmall.model.CourseInfoMapper" >
+  <resultMap id="BaseResultMap" type="com.mmall.model.CourseInfo" >
+    <constructor >
+      <idArg column="courseId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+    </constructor>
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.mmall.model.CourseInfo" >
+    <constructor >
+      <idArg column="courseId" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="info" jdbcType="LONGVARCHAR" javaType="java.lang.String" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    courseId
+  </sql>
+  <sql id="Blob_Column_List" >
+    info
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from t_course_info
+    where courseId = #{courseid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_course_info
+    where courseId = #{courseid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mmall.model.CourseInfo" >
+    insert into t_course_info (courseId, info)
+    values (#{courseid,jdbcType=INTEGER}, #{info,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mmall.model.CourseInfo" >
+    insert into t_course_info
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="courseid != null" >
+        courseId,
+      </if>
+      <if test="info != null" >
+        info,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="courseid != null" >
+        #{courseid,jdbcType=INTEGER},
+      </if>
+      <if test="info != null" >
+        #{info,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mmall.model.CourseInfo" >
+    update t_course_info
+    <set >
+      <if test="info != null" >
+        info = #{info,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where courseId = #{courseid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.mmall.model.CourseInfo" >
+    update t_course_info
+    set info = #{info,jdbcType=LONGVARCHAR}
+    where courseId = #{courseid,jdbcType=INTEGER}
+  </update>
+</mapper>

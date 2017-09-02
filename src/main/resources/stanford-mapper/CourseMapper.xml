@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.mmall.model.CourseMapper" >
+  <resultMap id="BaseResultMap" type="com.mmall.model.Course" >
+    <constructor >
+      <idArg column="id" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="name" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="price" jdbcType="DECIMAL" javaType="java.math.BigDecimal" />
+      <arg column="coverUrl" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="teacher" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="intriduce" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="sale" jdbcType="TINYINT" javaType="java.lang.Byte" />
+      <arg column="time" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="check" jdbcType="VARCHAR" javaType="java.lang.String" />
+      <arg column="ctime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="mtime" jdbcType="TIMESTAMP" javaType="java.util.Date" />
+      <arg column="cuser" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="muser" jdbcType="INTEGER" javaType="java.lang.Integer" />
+      <arg column="state" jdbcType="TINYINT" javaType="java.lang.Byte" />
+    </constructor>
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, name, price, coverUrl, teacher, intriduce, sale, time, check, ctime, mtime, cuser, 
+    muser, state
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from t_course
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from t_course
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.mmall.model.Course" >
+    insert into t_course (id, name, price, 
+      coverUrl, teacher, intriduce, 
+      sale, time, check, 
+      ctime, mtime, cuser, 
+      muser, state)
+    values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{coverurl,jdbcType=VARCHAR}, #{teacher,jdbcType=VARCHAR}, #{intriduce,jdbcType=VARCHAR}, 
+      #{sale,jdbcType=TINYINT}, #{time,jdbcType=INTEGER}, #{check,jdbcType=VARCHAR}, 
+      #{ctime,jdbcType=TIMESTAMP}, #{mtime,jdbcType=TIMESTAMP}, #{cuser,jdbcType=INTEGER}, 
+      #{muser,jdbcType=INTEGER}, #{state,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.mmall.model.Course" >
+    insert into t_course
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="name != null" >
+        name,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="coverurl != null" >
+        coverUrl,
+      </if>
+      <if test="teacher != null" >
+        teacher,
+      </if>
+      <if test="intriduce != null" >
+        intriduce,
+      </if>
+      <if test="sale != null" >
+        sale,
+      </if>
+      <if test="time != null" >
+        time,
+      </if>
+      <if test="check != null" >
+        check,
+      </if>
+      <if test="ctime != null" >
+        ctime,
+      </if>
+      <if test="mtime != null" >
+        mtime,
+      </if>
+      <if test="cuser != null" >
+        cuser,
+      </if>
+      <if test="muser != null" >
+        muser,
+      </if>
+      <if test="state != null" >
+        state,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="coverurl != null" >
+        #{coverurl,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null" >
+        #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="intriduce != null" >
+        #{intriduce,jdbcType=VARCHAR},
+      </if>
+      <if test="sale != null" >
+        #{sale,jdbcType=TINYINT},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=INTEGER},
+      </if>
+      <if test="check != null" >
+        #{check,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null" >
+        #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cuser != null" >
+        #{cuser,jdbcType=INTEGER},
+      </if>
+      <if test="muser != null" >
+        #{muser,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        #{state,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.mmall.model.Course" >
+    update t_course
+    <set >
+      <if test="name != null" >
+        name = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="coverurl != null" >
+        coverUrl = #{coverurl,jdbcType=VARCHAR},
+      </if>
+      <if test="teacher != null" >
+        teacher = #{teacher,jdbcType=VARCHAR},
+      </if>
+      <if test="intriduce != null" >
+        intriduce = #{intriduce,jdbcType=VARCHAR},
+      </if>
+      <if test="sale != null" >
+        sale = #{sale,jdbcType=TINYINT},
+      </if>
+      <if test="time != null" >
+        time = #{time,jdbcType=INTEGER},
+      </if>
+      <if test="check != null" >
+        check = #{check,jdbcType=VARCHAR},
+      </if>
+      <if test="ctime != null" >
+        ctime = #{ctime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="mtime != null" >
+        mtime = #{mtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="cuser != null" >
+        cuser = #{cuser,jdbcType=INTEGER},
+      </if>
+      <if test="muser != null" >
+        muser = #{muser,jdbcType=INTEGER},
+      </if>
+      <if test="state != null" >
+        state = #{state,jdbcType=TINYINT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.mmall.model.Course" >
+    update t_course
+    set name = #{name,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      coverUrl = #{coverurl,jdbcType=VARCHAR},
+      teacher = #{teacher,jdbcType=VARCHAR},
+      intriduce = #{intriduce,jdbcType=VARCHAR},
+      sale = #{sale,jdbcType=TINYINT},
+      time = #{time,jdbcType=INTEGER},
+      check = #{check,jdbcType=VARCHAR},
+      ctime = #{ctime,jdbcType=TIMESTAMP},
+      mtime = #{mtime,jdbcType=TIMESTAMP},
+      cuser = #{cuser,jdbcType=INTEGER},
+      muser = #{muser,jdbcType=INTEGER},
+      state = #{state,jdbcType=TINYINT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
